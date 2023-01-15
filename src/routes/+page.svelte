@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { readable } from 'svelte/store';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
+	import Portfolio from './portfolio.svelte';
 
-	const cycleText = readable(['the hopefully employed', 'not a UX designer']);
-	const cycleCountdown = readable(5000);
+	import { cycleText, cycleCountdown } from '../stores/cyclingText';
+
 	let cyclingTextIndex = 0;
-
 	let displayedText: string;
 	$: displayedText = $cycleText[cyclingTextIndex % $cycleText.length];
-
-	let countdownId: NodeJS.Timer;
+    
+	let cyclingCountdownId: NodeJS.Timer;
 
 	const letterInNamesAndLinks = readable([
 		'J',
@@ -34,7 +34,7 @@
 		});
 
 		addGradient(bigLetter, i);
-		clearInterval(countdownId);
+		clearInterval(cyclingCountdownId);
 	};
 
 	const resetLetters = (i: number) => {
@@ -52,35 +52,29 @@
 		removeGradient(bigLetter, i);
 
 		// restart the cycling text countdown
-		countdownId = setInterval(() => {
-			cyclingTextIndex++;
-		}, $cycleCountdown);
+		cyclingCountdownId = setInterval(() => cyclingTextIndex++, $cycleCountdown);
 	};
 
-	const addGradient = (elem: HTMLElement, i: number) => {
-		elem.classList.add('bg-color-' + i);
-	};
-	const removeGradient = (elem: HTMLElement, i: number) => {
-		elem.classList.remove('bg-color-' + i);
+	const addGradient = (elem: HTMLElement, i: number) => elem.classList.add('bg-color-' + i);
+	const removeGradient = (elem: HTMLElement, i: number) => elem.classList.remove('bg-color-' + i);
+
+	const shiftDots = (e: MouseEvent) => {
+		const mainTextDiv = document.getElementById('main-text') as HTMLElement;
+
+		const x = e.clientX / window.innerWidth;
+		const y = e.clientY / window.innerHeight;
+
+		const panX = x * 5;
+		const panY = y * 5;
+
+		mainTextDiv.style.backgroundPosition = `${panX}px ${panY}px, 7.5vmin 7.5vmin`;
 	};
 
 	onMount(() => {
-		countdownId = setInterval(() => {
+		cyclingCountdownId = setInterval(() => {
 			cyclingTextIndex++;
 		}, $cycleCountdown);
 	});
-
-    const shiftDots = (e: MouseEvent) => {
-        const mainTextDiv = document.getElementById('main-text') as HTMLElement;
-
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-
-        const panX = x * 5;
-        const panY = y * 5;
-
-        mainTextDiv.style.backgroundPosition = `${panX}px ${panY}px, 7.5vmin 7.5vmin`;
-    }
 </script>
 
 <!-- add a centered bold Joseph in the middle of the page -->
@@ -104,7 +98,7 @@
 					on:mouseleave={() => resetLetters(i)}
 				>
 					<span class="clickable letter">{letter.charAt(0)}</span>
-                    <span class="clickable smaller-letter letter-{i}">{letter.slice(1)}</span>
+					<span class="clickable smaller-letter letter-{i}">{letter.slice(1)}</span>
 				</span>
 			{/each}
 		</h1>
@@ -118,17 +112,16 @@
 	:global(body) {
 		background-color: #000;
 		color: #fff;
-		
 	}
 
-    #main-text {
-        background-image: radial-gradient(rgba(255, 255, 255, 0.1) 8%, transparent 8%),
-            radial-gradient(rgba(168, 168, 168, 0.1) 8%, transparent 8%);
+	#main-text {
+		background-image: radial-gradient(rgba(255, 255, 255, 0.15) 8%, transparent 8%),
+			radial-gradient(rgba(168, 168, 168, 0.15) 8%, transparent 8%);
 
-        /* position second row of dots halfway diagonally to first row */
-        background-position: 0 0, 7.5vmin 7.5vmin;
-        background-size: 5vmin 5vmin;
-    }
+		/* position second row of dots halfway diagonally to first row */
+		background-position: 0 0, 7.5vmin 7.5vmin;
+		background-size: 5vmin 5vmin;
+	}
 
 	.debug {
 		border: 1px solid red;
