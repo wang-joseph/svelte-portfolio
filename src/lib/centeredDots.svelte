@@ -1,6 +1,9 @@
 <script lang='ts'>
+	import { slide } from 'svelte/transition';
+
 	export let id: string;
 	export let shiftMultiplier: number = 5;
+	export let height: string = "100vh";
 
 	const shiftDots = (e: MouseEvent) => {
 		const dotsDiv = document.getElementById(id) as HTMLElement;
@@ -15,7 +18,7 @@
 	};
 </script>
 
-<div id={id} class="dots center" on:mousemove={shiftDots} >
+<div id={id} class="dots" style={`height: ${height}`} on:mousemove={shiftDots} transition:slide|local>
     <slot />
 </div>
 
@@ -34,6 +37,9 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		height: 100vh;
+	}
+
+	.debug {
+		border: 1px solid red;
 	}
 </style>
