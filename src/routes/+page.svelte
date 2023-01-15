@@ -2,37 +2,41 @@
     import Header from '../lib/header.svelte';
 	import About from './about.svelte';
 
+    import CenteredDots from '../lib/centeredDots.svelte';
+
     import { pageStatus } from '../stores/pageStatus';
 
 </script>
 
-<Header />
+<CenteredDots id="main-dots">
+    <Header />
 
-{#if $pageStatus == 0}
-    <About />
-{/if}
-
-{#if $pageStatus == 1}
-    <div id="about">
+    {#if $pageStatus == 0}
         <About />
-    </div>
-{/if}
+    {/if}
 
-{#if $pageStatus == 2}
-    <About />
-{/if}
+    {#if $pageStatus == 1}
+        <div id="about">
+            <About />
+        </div>
+    {/if}
 
-{#if $pageStatus == 3}
-    <About />
-{/if}
+    {#if $pageStatus == 2}
+        <About />
+    {/if}
 
-{#if $pageStatus == 4}
-    <About />
-{/if}
+    {#if $pageStatus == 3}
+        <About />
+    {/if}
 
-{#if $pageStatus == 5}
-    <About />
-{/if}
+    {#if $pageStatus == 4}
+        <About />
+    {/if}
+
+    {#if $pageStatus == 5}
+        <About />
+    {/if}
+</CenteredDots>
 
 <style>
 	:global(body) {

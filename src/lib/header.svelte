@@ -3,10 +3,8 @@
 	import { cycleColors } from '../stores/cyclingColors';
 	import { pageStatus } from '..//stores/pageStatus';
 
-	import CenteredDots from './centeredDots.svelte';
 	import CyclingWords from './cyclingWords.svelte';
-	import { fade, fly, slide } from 'svelte/transition';
-	import { onMount } from 'svelte';
+	import { slide } from 'svelte/transition';
 	import AsideWords from './asideWords.svelte';
 
 	let stopWordCycle: () => void;
@@ -85,68 +83,66 @@
 
 <!-- add a centered bold Joseph in the middle of the page -->
 <div id="main-text">
-	<CenteredDots id="main-dots">
-		<div class="center" style={`height: ${heightOfMain}vh`} transition:slide>
-			{#if $pageStatus == -1}
-				<div class="line">
-					<h3 class="word">Hi, I'm</h3>
-				</div>
-				<div class="line">
-					<span class="word">
-						<CyclingWords
-							bind:stopCycleCallback={stopWordCycle}
-							bind:startCycleCallback={startWordCycle}
-						/>
-					</span>
-				</div>
-			{/if}
-
+	<div class="center" style={`height: ${heightOfMain}vh`} transition:slide>
+		{#if $pageStatus == -1}
 			<div class="line">
-				<h1 class="fancy word">
-					{#each $letterInNamesAndLinks as letter, i}
-						<a href="#about">
-							<span
-								id="big-letter-{i}"
-								class="name bigger-letter"
-								on:mouseenter={() => expandLetters(i)}
-								on:mouseleave={() => resetLetters(i)}
-								on:click={() => {
-									if ($pageStatus == 1) {
-										$pageStatus = -1;
-										heightOfMain = 100;
-									} else {
-										$pageStatus = 1;
-										heightOfMain = 20;
-									}
-
-									hasClicked = true;
-								}}
-								on:keydown
-							>
-								<span class="clickable letter">{letter.charAt(0)}</span>
-								<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
-							</span>
-						</a>
-					{/each}
-				</h1>
-
-				<AsideWords
-					bind:needsToShow
-					bind:cancelledEarly
-					bind:showed
-					bind:hasHovered
-					bind:hasClicked
-					bind:hoverPopup
-				/>
+				<h3 class="word">Hi, I'm</h3>
 			</div>
+			<div class="line">
+				<span class="word">
+					<CyclingWords
+						bind:stopCycleCallback={stopWordCycle}
+						bind:startCycleCallback={startWordCycle}
+					/>
+				</span>
+			</div>
+		{/if}
 
-			{#if $pageStatus == -1}
-				<div class="line">
-					<h3 class="word">Wang</h3>
-				</div>
-			{/if}
+		<div class="line">
+			<h1 class="fancy word">
+				{#each $letterInNamesAndLinks as letter, i}
+					<a href="#about">
+						<span
+							id="big-letter-{i}"
+							class="name bigger-letter"
+							on:mouseenter={() => expandLetters(i)}
+							on:mouseleave={() => resetLetters(i)}
+							on:click={() => {
+								if ($pageStatus == 1) {
+									$pageStatus = -1;
+									heightOfMain = 100;
+								} else {
+									$pageStatus = 1;
+									heightOfMain = 20;
+								}
+
+								hasClicked = true;
+							}}
+							on:keydown
+						>
+							<span class="clickable letter">{letter.charAt(0)}</span>
+							<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
+						</span>
+					</a>
+				{/each}
+			</h1>
+
+			<AsideWords
+				bind:needsToShow
+				bind:cancelledEarly
+				bind:showed
+				bind:hasHovered
+				bind:hasClicked
+				bind:hoverPopup
+			/>
 		</div>
-	</CenteredDots>
+
+		{#if $pageStatus == -1}
+			<div class="line">
+				<h3 class="word">Wang</h3>
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
