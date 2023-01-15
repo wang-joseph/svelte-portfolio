@@ -5,10 +5,9 @@
 
 	import { cycleText, cycleCountdown } from '../stores/cyclingText';
 	import { letterInNamesAndLinks } from '../stores/nameLinks';
-    import { cycleColors } from '../stores/cyclingColors';
+	import { cycleColors } from '../stores/cyclingColors';
 
-    // TODO: prop this
-    const mainColor = '#fff'; 
+	import CenteredDots from './centeredDots.svelte';
 
 	let cyclingTextIndex = 0;
 	let displayedText: string;
@@ -29,7 +28,7 @@
 		giveColors(letter, i);
 		giveColors(bigLetter, i);
 
-        // stop the cycling text for UX reasons
+		// stop the cycling text for UX reasons
 		clearInterval(cyclingCountdownId);
 	};
 
@@ -41,46 +40,33 @@
 
 		letter.style.letterSpacing = '-1em';
 
-        resetColors(letter);
-        resetColors(bigLetter);
+		resetColors(letter);
+		resetColors(bigLetter);
 
 		// restart the cycling text countdown
 		cyclingCountdownId = setInterval(() => cyclingTextIndex++, $cycleCountdown);
 	};
 
-    const giveColors = (elem: HTMLElement, i: number) => {
-        const allColors = get(cycleColors);
-        const color = allColors[i];
+	const giveColors = (elem: HTMLElement, i: number) => {
+		const allColors = get(cycleColors);
+		const color = allColors[i];
 
-        if (color === undefined || Object.keys(color).length === 0) return;
+		if (color === undefined || Object.keys(color).length === 0) return;
 
-        console.log(elem.style.background);
+		console.log(elem.style.background);
 
-        elem.style.background =
-        `linear-gradient(${color.rot}, ${color.startColor}, ${color.midColor}, ${color.endColor})`;
-        elem.style.backgroundSize = '400% 400%';
-        elem.style.webkitBackgroundClip = 'text';
-        elem.style.backgroundClip = 'text';
-        elem.style.webkitTextFillColor = 'transparent';
-    }
+		elem.style.background = `linear-gradient(${color.rot}, ${color.startColor}, ${color.midColor}, ${color.endColor})`;
+		elem.style.backgroundSize = '400% 400%';
+		elem.style.webkitBackgroundClip = 'text';
+		elem.style.backgroundClip = 'text';
+		elem.style.webkitTextFillColor = 'transparent';
+	};
 
-    const resetColors = (elem: HTMLElement) => {
-        elem.style.background = "";
-        elem.style.webkitBackgroundClip = "";
-        elem.style.backgroundClip = "";
-        elem.style.webkitTextFillColor = "";
-    }
-
-	const shiftDots = (e: MouseEvent) => {
-		const mainTextDiv = document.getElementById('main-text') as HTMLElement;
-
-		const x = e.clientX / window.innerWidth;
-		const y = e.clientY / window.innerHeight;
-
-		const panX = x * 5;
-		const panY = y * 5;
-
-		mainTextDiv.style.backgroundPosition = `${panX}px ${panY}px, 7.5vmin 7.5vmin`;
+	const resetColors = (elem: HTMLElement) => {
+		elem.style.background = '';
+		elem.style.webkitBackgroundClip = '';
+		elem.style.backgroundClip = '';
+		elem.style.webkitTextFillColor = '';
 	};
 
 	onMount(() => {
@@ -91,47 +77,38 @@
 </script>
 
 <!-- add a centered bold Joseph in the middle of the page -->
-<div id="main-text" class="bold center" on:mousemove={shiftDots}>
-	<div class="line">
-		<h3 class="word">Hi, I'm</h3>
-	</div>
-	<div class="line">
-		{#key displayedText}
-			<h4 class="word" in:fly={{ y: 50, duration: 500 }}>
-				{displayedText}
-			</h4>
-		{/key}
-	</div>
-	<div class="line">
-		<h1 class="fancy word">
-			{#each $letterInNamesAndLinks as letter, i}
-				<span
-					id="big-letter-{i}"
-					class="name bigger-letter"
-					on:mouseenter={() => expandLetters(i)}
-					on:mouseleave={() => resetLetters(i)}
-				>
-					<span class="clickable letter">{letter.charAt(0)}</span>
-					<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
-				</span>
-			{/each}
-		</h1>
-	</div>
-	<div class="line">
-		<h3 class="word">Wang</h3>
-	</div>
-</div>
+	<CenteredDots id="main-text">
+		<div class="line">
+			<h3 class="word">Hi, I'm</h3>
+		</div>
+		<div class="line">
+			{#key displayedText}
+				<h4 class="word" in:fly={{ y: 50, duration: 500 }}>
+					{displayedText}
+				</h4>
+			{/key}
+		</div>
+		<div class="line">
+			<h1 class="fancy word">
+				{#each $letterInNamesAndLinks as letter, i}
+					<span
+						id="big-letter-{i}"
+						class="name bigger-letter"
+						on:mouseenter={() => expandLetters(i)}
+						on:mouseleave={() => resetLetters(i)}
+					>
+						<span class="clickable letter">{letter.charAt(0)}</span>
+						<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
+					</span>
+				{/each}
+			</h1>
+		</div>
+		<div class="line">
+			<h3 class="word">Wang</h3>
+		</div>
+	</CenteredDots>
 
 <style>
-	#main-text {
-		background-image: radial-gradient(rgba(255, 255, 255, 0.15) 8%, transparent 8%),
-			radial-gradient(rgba(168, 168, 168, 0.15) 8%, transparent 8%);
-
-		/* position second row of dots halfway diagonally to first row */
-		background-position: 0 0, 7.5vmin 7.5vmin;
-		background-size: 5vmin 5vmin;
-	}
-
 	.debug {
 		border: 1px solid red;
 	}
@@ -189,15 +166,15 @@
 
 		animation: background-pan 3s linear infinite;
 	}
-    
-    .bigger-letter {
-        animation: background-pan 3s linear infinite;
-    }
 
-    .fancy {
-        position: relative;
-        z-index: 1;
-    }
+	.bigger-letter {
+		animation: background-pan 3s linear infinite;
+	}
+
+	.fancy {
+		position: relative;
+		z-index: 1;
+	}
 
 	@keyframes background-pan {
 		0% {
@@ -212,7 +189,6 @@
 	.clickable {
 		cursor: pointer;
 	}
-
 
 	#main-text:has(.fancy:hover) .word:not(.fancy:hover) {
 		opacity: 0.2;
