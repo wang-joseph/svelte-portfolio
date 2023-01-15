@@ -42,5 +42,10 @@ export const cycleColors = readable([
 		midColor: 'rgba(0, 239, 255, 1) 52%',
 		endColor: 'rgba(99, 89, 255, 1) 100%'
 	},
-	{}
+	{
+        rot: '90deg', 
+        startColor: "rgba(231,48,0,1) 0%", 
+        midColor: "rgba(220,101,243,1) 52%", 
+        endColor: "rgba(231,48,0,1) 100%"
+    }
 ]);

@@ -15,4 +15,9 @@
 		font-family: 'Beckman Free';
 		src: url('/fonts/Beckman-Free.otf');
 	}
+
+    @font-face {
+		font-family: 'Josefin Sans Light';
+		src: url('/fonts/JosefinSans-Light.ttf');
+	}
 </style>

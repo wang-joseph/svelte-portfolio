@@ -1,30 +1,36 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
-	import { get } from 'svelte/store';
-	import { onMount } from 'svelte';
-
-	import { cycleText, cycleCountdown } from '../stores/cyclingText';
 	import { letterInNamesAndLinks } from '../stores/nameLinks';
 	import { cycleColors } from '../stores/cyclingColors';
 
 	import CenteredDots from './centeredDots.svelte';
 	import CyclingWords from './cyclingWords.svelte';
-
-	let cyclingTextIndex = 0;
-	let displayedText: string;
-	$: displayedText = $cycleText[cyclingTextIndex % $cycleText.length];
-
-	let cyclingCountdownId: NodeJS.Timer;
+	import { fade, fly } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	let stopWordCycle: () => void;
 	let startWordCycle: () => void;
 
+    let needsToShow = false;
+    let showed = false;
+    let cancelledEarly = true;
+    let hasHovered = false;
+    let hasClicked = false;
+    let hoverPopup: NodeJS.Timer;
+
 	const expandLetters = (i: number) => {
 		const letter = document.getElementById(`letter-${i}`) as HTMLElement;
 		const bigLetter = document.getElementById(`big-letter-${i}`) as HTMLElement;
-
+        
 		if (!letter || !bigLetter) return;
 
+        //set shouldShow to false if there is a letter that is not expanded
+        if ($letterInNamesAndLinks[i].slice(1).length > 0) {
+            needsToShow = false;
+            hasHovered = true;
+            showed = true;
+            clearTimeout(hoverPopup);
+        }
+        
 		letter.style.letterSpacing = '0em';
 
 		giveColors(letter, i);
@@ -50,12 +56,10 @@
 	};
 
 	const giveColors = (elem: HTMLElement, i: number) => {
-		const allColors = get(cycleColors);
+		const allColors = $cycleColors;
 		const color = allColors[i];
 
 		if (color === undefined || Object.keys(color).length === 0) return;
-
-		console.log(elem.style.background);
 
 		elem.style.background = `linear-gradient(${color.rot}, ${color.startColor}, ${color.midColor}, ${color.endColor})`;
 		elem.style.backgroundSize = '400% 400%';
@@ -70,6 +74,14 @@
 		elem.style.backgroundClip = '';
 		elem.style.webkitTextFillColor = '';
 	};
+
+    onMount(() => {
+        hoverPopup = setTimeout(() => {
+            needsToShow = true;
+            showed = true;
+            cancelledEarly = false;
+        }, 1500);
+    });
 </script>
 
 <!-- add a centered bold Joseph in the middle of the page -->
@@ -81,6 +93,7 @@
 		<div class="line">
 			<span class="word">
 				<CyclingWords
+					size={36}
 					bind:stopCycleCallback={stopWordCycle}
 					bind:startCycleCallback={startWordCycle}
 				/>
@@ -100,6 +113,22 @@
 					</span>
 				{/each}
 			</h1>
+            {#if needsToShow}
+                <span class="main-word-aside" in:fly="{{ y: 50, duration: 1000 }}" out:fade>
+                    <h4 class="side-note">Hover my name!</h4>
+                    <img class="main-word-aside-img" src="./pointing-arrow.png" alt=""/>
+                </span>
+            {:else if (cancelledEarly && hasHovered)}
+                <span class="main-word-aside" in:fade out:fade>
+                    <h4 class="side-note">Hey! Try clicking!</h4>
+                    <img class="main-word-aside-img" src="./pointing-arrow.png" alt=""/>
+                </span>
+            {:else if (showed && !hasClicked) }
+                <span class="main-word-aside" in:fade out:fade>
+                    <h4 class="side-note">Now, try clicking!</h4>
+                    <img class="main-word-aside-img" src="./pointing-arrow.png" alt=""/>
+                </span>
+            {/if}
 		</div>
 		<div class="line">
 			<h3 class="word">Wang</h3>
@@ -129,6 +158,7 @@
 	}
 
 	.line {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -141,6 +171,30 @@
 	.word {
 		font-family: 'Beckman Free', serif;
 	}
+
+	.side-note {
+		font-family: 'Josefin Sans Light', sans-serif;
+	}
+
+	.main-word-aside {
+		position: absolute;
+		bottom: 0;
+        right: 0;
+
+        display: flex;
+        align-items: flex-end;
+
+        background: linear-gradient(90deg, rgba(246,89,255,1) 0%, rgba(0,222,255,1) 0%, rgba(0,84,231,1) 100%);
+        background-size: 200% 200%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+	}
+
+    .main-word-aside-img {
+        width: 2em;
+        height: 2em;        
+    }
 
 	.letter {
 		margin: 0;
@@ -200,12 +254,12 @@
 	}
 
 	h3 {
-		font-size: 64px;
+		font-size: 48px;
 		margin: 0;
 	}
 
-	h4 {
-		font-size: 48px;
+    h4 {
+		font-size: 16px;
 		margin: 0;
 	}
 </style>

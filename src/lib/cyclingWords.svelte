@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { get } from 'svelte/store';
 	import { fly } from 'svelte/transition';
     import { onMount } from 'svelte';
 
@@ -12,7 +11,7 @@
 	export const startCycleCallback: () => void = () => {
 		cyclingCountdownId = setInterval(() => {
 			cyclingTextIndex++;
-		}, get(cycleCountdown));
+		}, $cycleCountdown);
 	};
 
 	let cyclingTextIndex = 0;

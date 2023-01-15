@@ -6,5 +6,5 @@ export const letterInNamesAndLinks = readable([
     'socials',
     'experience',
     'portfolio',
-    'h'
+    'hello'
 ]);
