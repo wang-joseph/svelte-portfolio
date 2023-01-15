@@ -7,6 +7,7 @@
 	import CyclingWords from './cyclingWords.svelte';
 	import { fade, fly, slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import AsideWords from './asideWords.svelte';
 
 	let stopWordCycle: () => void;
 	let startWordCycle: () => void;
@@ -45,7 +46,7 @@
 	};
 
 	const resetLetters = (i: number) => {
-        if ($pageStatus === i) return;
+		if ($pageStatus === i) return;
 
 		const letter = document.getElementById(`letter-${i}`) as HTMLElement;
 		const bigLetter = document.getElementById(`big-letter-${i}`) as HTMLElement;
@@ -80,14 +81,6 @@
 		elem.style.backgroundClip = '';
 		elem.style.webkitTextFillColor = '';
 	};
-
-	onMount(() => {
-		hoverPopup = setTimeout(() => {
-			needsToShow = true;
-			showed = true;
-			cancelledEarly = false;
-		}, 1500);
-	});
 </script>
 
 <!-- add a centered bold Joseph in the middle of the page -->
@@ -136,22 +129,15 @@
 						</a>
 					{/each}
 				</h1>
-				{#if needsToShow}
-					<span class="main-word-aside" in:fly={{ y: 50, duration: 1000 }} out:fade>
-						<h4 class="side-note">Hover my name!</h4>
-						<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
-					</span>
-				{:else if cancelledEarly && hasHovered}
-					<span class="main-word-aside" in:fly={{ y: 50, duration: 1000 }} out:fade>
-						<h4 class="side-note">Hey! Try clicking!</h4>
-						<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
-					</span>
-				{:else if showed && !hasClicked}
-					<span class="main-word-aside" in:fade out:fade>
-						<h4 class="side-note">Now, try clicking!</h4>
-						<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
-					</span>
-				{/if}
+
+				<AsideWords
+					bind:needsToShow
+					bind:cancelledEarly
+					bind:showed
+					bind:hasHovered
+					bind:hasClicked
+					bind:hoverPopup
+				/>
 			</div>
 
 			{#if $pageStatus == -1}
@@ -183,7 +169,7 @@
 		justify-content: center;
 		align-items: center;
 
-        transition: height 0.5s ease-in-out;
+		transition: height 0.5s ease-in-out;
 	}
 
 	.name {
@@ -203,35 +189,6 @@
 
 	.word {
 		font-family: 'Beckman Free', serif;
-	}
-
-	.side-note {
-		font-family: 'Josefin Sans Light', sans-serif;
-	}
-
-	.main-word-aside {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-
-		display: flex;
-		align-items: flex-end;
-
-		background: linear-gradient(
-			90deg,
-			rgba(246, 89, 255, 1) 0%,
-			rgba(0, 222, 255, 1) 0%,
-			rgba(0, 84, 231, 1) 100%
-		);
-		background-size: 200% 200%;
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-
-	.main-word-aside-img {
-		width: 2em;
-		height: 2em;
 	}
 
 	.letter {
