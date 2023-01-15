@@ -8,29 +8,29 @@
 
 <Header />
 
-{#if $pageStatus["J"]}
+{#if $pageStatus == 0}
     <About />
 {/if}
 
-{#if $pageStatus["O"]}
+{#if $pageStatus == 1}
     <div id="about">
         <About />
     </div>
 {/if}
 
-{#if $pageStatus["S"]}
+{#if $pageStatus == 2}
     <About />
 {/if}
 
-{#if $pageStatus["E"]}
+{#if $pageStatus == 3}
     <About />
 {/if}
 
-{#if $pageStatus["P"]}
+{#if $pageStatus == 4}
     <About />
 {/if}
 
-{#if $pageStatus["H"]}
+{#if $pageStatus == 5}
     <About />
 {/if}
 

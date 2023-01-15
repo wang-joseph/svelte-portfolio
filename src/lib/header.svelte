@@ -101,7 +101,6 @@
 				<div class="line">
 					<span class="word">
 						<CyclingWords
-							size={36}
 							bind:stopCycleCallback={stopWordCycle}
 							bind:startCycleCallback={startWordCycle}
 						/>
