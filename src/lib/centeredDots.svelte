@@ -31,15 +31,4 @@
 		background-position: 0 0, 7.5vmin 7.5vmin;
 		background-size: 5vmin 5vmin;
     }
-
-	.center {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.debug {
-		border: 1px solid red;
-	}
 </style>

@@ -159,11 +159,10 @@
 	}
 
 	.debug {
-		/* border: 1px solid red; */
+		border: 1px solid red;
 	}
 
 	.center {
-		/* center vertically */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -208,7 +207,6 @@
 		transition: ease-in-out 0.3s;
 		letter-spacing: -1em;
 
-		/* have the words on the bottom */
 		position: relative;
 		top: 0.25em;
 
@@ -257,5 +255,16 @@
 		text-decoration: none;
 		color: inherit;
 		letter-spacing: -1em;
+	}
+
+	/* media queries for phones */
+	@media only screen and (max-width: 600px) {
+		h1 {
+			font-size: 64px;
+		}
+
+		h3 {
+			font-size: 24px;
+		}
 	}
 </style>

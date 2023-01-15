@@ -38,4 +38,12 @@
         font-family: 'Beckman Free', serif;
 		font-size: 36px;
     }
+
+	/* media queries for phones */
+	@media only screen and (max-width: 600px) {
+		h4 {
+			font-size: 24px;
+		}
+	}
+
 </style>
