@@ -253,11 +253,6 @@
 		margin: 0;
 	}
 
-	h4 {
-		font-size: 16px;
-		margin: 0;
-	}
-
 	a {
 		text-decoration: none;
 		color: inherit;
