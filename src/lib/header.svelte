@@ -8,6 +8,7 @@
 	import { cycleColors } from '../stores/cyclingColors';
 
 	import CenteredDots from './centeredDots.svelte';
+	import CyclingWords from './cyclingWords.svelte';
 
 	let cyclingTextIndex = 0;
 	let displayedText: string;
@@ -15,7 +16,8 @@
 
 	let cyclingCountdownId: NodeJS.Timer;
 
-	let bigLetters = [];
+	let stopWordCycle: () => void;
+	let startWordCycle: () => void;
 
 	const expandLetters = (i: number) => {
 		const letter = document.getElementById(`letter-${i}`) as HTMLElement;
@@ -29,7 +31,7 @@
 		giveColors(bigLetter, i);
 
 		// stop the cycling text for UX reasons
-		clearInterval(cyclingCountdownId);
+		stopWordCycle();
 	};
 
 	const resetLetters = (i: number) => {
@@ -44,7 +46,7 @@
 		resetColors(bigLetter);
 
 		// restart the cycling text countdown
-		cyclingCountdownId = setInterval(() => cyclingTextIndex++, $cycleCountdown);
+		startWordCycle();
 	};
 
 	const giveColors = (elem: HTMLElement, i: number) => {
@@ -68,25 +70,21 @@
 		elem.style.backgroundClip = '';
 		elem.style.webkitTextFillColor = '';
 	};
-
-	onMount(() => {
-		cyclingCountdownId = setInterval(() => {
-			cyclingTextIndex++;
-		}, $cycleCountdown);
-	});
 </script>
 
 <!-- add a centered bold Joseph in the middle of the page -->
-	<CenteredDots id="main-text">
+<div id="main-text">
+	<CenteredDots id="main-dots">
 		<div class="line">
 			<h3 class="word">Hi, I'm</h3>
 		</div>
 		<div class="line">
-			{#key displayedText}
-				<h4 class="word" in:fly={{ y: 50, duration: 500 }}>
-					{displayedText}
-				</h4>
-			{/key}
+			<span class="word">
+				<CyclingWords
+					bind:stopCycleCallback={stopWordCycle}
+					bind:startCycleCallback={startWordCycle}
+				/>
+			</span>
 		</div>
 		<div class="line">
 			<h1 class="fancy word">
@@ -107,6 +105,7 @@
 			<h3 class="word">Wang</h3>
 		</div>
 	</CenteredDots>
+</div>
 
 <style>
 	.debug {
@@ -140,7 +139,7 @@
 	}
 
 	.word {
-		font-family: 'Beckman Free';
+		font-family: 'Beckman Free', serif;
 	}
 
 	.letter {
