@@ -4,23 +4,13 @@
 
 	import { cycleText, cycleCountdown } from '../stores/cyclingText';
 
-	export const stopCycleCallback: () => void = () => {
-		clearInterval(cyclingCountdownId);
-	};
-	export const startCycleCallback: () => void = () => {
-		cyclingCountdownId = setInterval(() => {
-			cyclingTextIndex++;
-		}, $cycleCountdown);
-	};
 
 	let cyclingTextIndex = 0;
 	let displayedText: string;
 	$: displayedText = $cycleText[cyclingTextIndex % $cycleText.length];
 
-	let cyclingCountdownId: NodeJS.Timer;
-
 	onMount(() => {
-		cyclingCountdownId = setInterval(() => {
+		setInterval(() => {
 			cyclingTextIndex++;
 		}, $cycleCountdown);
 	});

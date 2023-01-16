@@ -38,9 +38,6 @@
 
 		giveColors(letter, i);
 		giveColors(bigLetter, i);
-
-		// stop the cycling text for UX reasons
-		stopWordCycle();
 	};
 
 	const resetLetters = (i: number) => {
@@ -55,9 +52,6 @@
 
 		resetColors(letter);
 		resetColors(bigLetter);
-
-		// restart the cycling text countdown
-		startWordCycle();
 	};
 
 	const giveColors = (elem: HTMLElement, i: number) => {
@@ -90,10 +84,7 @@
 			</div>
 			<div class="line" transition:fade>
 				<span class="word">
-					<CyclingWords
-						bind:stopCycleCallback={stopWordCycle}
-						bind:startCycleCallback={startWordCycle}
-					/>
+					<CyclingWords />
 				</span>
 			</div>
 		{/if}
@@ -107,18 +98,23 @@
 						on:mouseenter={() => expandLetters(i)}
 						on:mouseleave={() => resetLetters(i)}
 						on:click={() => {
+							if (i == 0) {
+								window.document.body.classList.toggle('light-mode');
+								$pageStatus = 0;
+							}
+
 							if ($pageStatus == i) {
 								$pageStatus = -1;
 								heightOfMain = 100;
 							} else {
 								$pageStatus = i;
 								heightOfMain = 20;
-								
-								// call reset on every other letter
-								$letterInNamesAndLinks.forEach((_, j) => {
-									if (j != i) resetLetters(j);
-								});
 							}
+
+							// call reset on every other letter
+							$letterInNamesAndLinks.forEach((_, j) => {
+								if (j != i) resetLetters(j);
+							});
 
 							hasClicked = true;
 						}}

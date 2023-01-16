@@ -17,7 +17,12 @@ interface cyclingColorsInterface {
 }
 
 export const cycleColors = readable([
-	{},
+	{
+		rot: '90deg',
+		startColor: 'rgba(0, 0, 0, 1) 0%',
+		midColor: 'rgba(255, 255, 255, 1) 50%',
+		endColor: 'rgba(0, 0, 0, 1) 100%'
+	},
 	{
 		rot: '90deg',
 		startColor: 'rgba(255, 89, 89, 1) 0%',

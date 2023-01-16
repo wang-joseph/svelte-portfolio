@@ -32,4 +32,6 @@
 		background-size: 5vmin 5vmin;
 		z-index: -2;
     }
+
+	/* TODO: get dots showing better for light mode */
 </style>

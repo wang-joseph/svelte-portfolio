@@ -43,7 +43,14 @@
 
         padding: 0;
         margin: 0;
+
+        transition: color 0.3s, background-color 0.3s
 	}
+
+    :global(body.light-mode) {
+        background-color: #fff;
+        color: #000;
+    }
 
 	@font-face {
 		font-family: 'Beckman Free';

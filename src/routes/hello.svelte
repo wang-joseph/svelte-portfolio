@@ -2,8 +2,8 @@
 	import { slide } from 'svelte/transition';
 </script>
 
-<div id="about-me" class="about-me" transition:slide>
-	<div class="background-text">
+<div transition:slide>
+	<div class="background-text" transition:slide>
 		<span class="inner-bg-text">YOU'RE HERE GOOD WORK</span>
 	</div>
 
@@ -17,9 +17,13 @@
         <p class="inner-thoughts"> This site was made in a few days with Svelte as a learning project.</p> 
         <p class="inner-thoughts"> Please excuse any bugs as a result! I'll probably get to it.</p> 
         <p class="inner-thoughts"> For what I've done, check out the EP trio in my name.</p> 
+        <br><br><br>
+
+        <p class="inner-thoughts"> if you like light mode, click the J. </p>
+        <p class="inner-thoughts"> After realizing your mistake, click again for the sweet embrace of dark mode.</p> 
+
         <p class="inner-thoughts"> <small> I also have plans to hide a few things in here...good luck finding them </small></p> 
 
-        <br><br><br>
     </div>
 </div>
 

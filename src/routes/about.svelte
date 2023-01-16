@@ -2,8 +2,8 @@
 	import { slide } from 'svelte/transition';
 </script>
 
-<div id="about-me" class="about-me" transition:slide>
-	<div class="background-text">
+<div transition:slide>
+	<div class="background-text" transition:slide>
 		<span class="inner-bg-text">About Me</span>
 	</div>
 

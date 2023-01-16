@@ -1,7 +1,7 @@
 import { readable } from "svelte/store";
 
 export const letterInNamesAndLinks = readable([
-    'J',
+    'JDJUST',
     'OBOUT ME',
     'SOCIALS',
     'EXPERIENCE',
