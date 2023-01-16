@@ -20,24 +20,24 @@
 
 {#if needsToShow}
 	<div class="aside-container" in:fly={{ y: 50, duration: 1000 }} out:fade>
+		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 		<span>
 			<h4 class="side-note">Hover my name!</h4>
 		</span>
-		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 	</div>
 {:else if cancelledEarly && hasHovered && !hasClicked}
 	<div class="aside-container" in:fly={{ y: 50, duration: 1000 }} out:fade>
+		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 		<span>
 			<h4 class="side-note">Hey! Try clicking!</h4>
 		</span>
-		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 	</div>
 {:else if showed && !hasClicked}
 	<div class="aside-container" in:fade out:fade>
+		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 		<span>
 			<h4 class="side-note">Now, give me a click!</h4>
 		</span>
-		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 	</div>
 {/if}
 
@@ -48,13 +48,14 @@
 
 	.aside-container {
 		position: absolute;
-		bottom: 0;
-		right: 0;
+		top: 0;
+		right: -25%;
+		width: 30%;
 
 		/* align objects below in a row */
 		display: flex;
 		flex-direction: row;
-		align-items: flex-end;
+		align-items: flex-start;
 	}
 
 	.side-note {
