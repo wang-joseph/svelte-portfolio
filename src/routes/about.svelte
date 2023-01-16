@@ -16,7 +16,7 @@
 				<br /><br /> 
 				I think effervescent is the best word to make you sound smart, Lysol is the best cleaning product, and video game OSTs are underappreciated. Say hi to me whenever!
 				<br /><br /> 
-				<small> please don't dox me </small>
+				<small> :) </small>
 			</p>
 		</div>
 
