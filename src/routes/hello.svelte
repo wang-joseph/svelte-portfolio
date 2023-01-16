@@ -111,4 +111,10 @@
             font-size: 1.25em;
         }
     }
+
+    @media only screen and (max-width: 1000px) {
+		.background-text {
+            display: none;
+		}
+	}
 </style>

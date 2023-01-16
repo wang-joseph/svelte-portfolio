@@ -147,4 +147,11 @@
 			font-size: 1.25em;
 		}
 	}
+
+	/* TODO: fix so that text can appear mobile too */
+	@media only screen and (max-width: 1000px) {
+		.background-text {
+            display: none;
+		}
+	}
 </style>
