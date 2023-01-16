@@ -10,7 +10,12 @@
 	import Experience from './experience.svelte';
 	import Portfolio from './portfolio.svelte';
 
+    
 </script>
+
+<svelte:head>
+    <title>Joseph Wang</title>
+</svelte:head>
 
 <CenteredDots id="main-dots" shiftMultiplier={10}>
     <Header />
