@@ -1,7 +1,5 @@
 <script>
 	import { slide } from 'svelte/transition';
-
-	// TODO: make this soon dynamically update
 </script>
 
 <div id="about-me" class="about-me" transition:slide>
@@ -120,11 +118,5 @@
 
 	p > small {
 		font-size: 0.75em;
-	}
-
-	@keyframes spin { 
-		100% { 
-			transform: rotateZ(360deg);
-		}
 	}
 </style>

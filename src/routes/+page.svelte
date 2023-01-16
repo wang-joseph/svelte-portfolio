@@ -5,6 +5,7 @@
     import CenteredDots from '../lib/centeredDots.svelte';
 
     import { pageStatus } from '../stores/pageStatus';
+	import Hello from './hello.svelte';
 
 </script>
 
@@ -28,6 +29,7 @@
     {/if}
 
     {#if $pageStatus == 5}
+        <Hello />
     {/if}
 </CenteredDots>
 
