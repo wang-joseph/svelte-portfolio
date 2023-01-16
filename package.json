@@ -35,6 +35,5 @@
 		"vitest": "^0.25.3"
 	},
 	"type": "module",
-	"dependencies": {},
-	"homepage": "http://wang-joseph.github.io/svelte-portfolio"
+	"dependencies": {}
 }
