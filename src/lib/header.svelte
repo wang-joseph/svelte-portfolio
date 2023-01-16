@@ -100,7 +100,7 @@
 						on:click={() => {
 							if (i == 0) {
 								window.document.body.classList.toggle('light-mode');
-								$pageStatus = 0;
+								return;
 							}
 
 							if ($pageStatus == i) {

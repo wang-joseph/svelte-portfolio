@@ -62,6 +62,8 @@
 		display: table-cell;
 		vertical-align: bottom;
 
+		font-size: 20px;
+
 		background: linear-gradient(
 			90deg,
 			rgba(246, 89, 255, 1) 0%,
@@ -75,7 +77,7 @@
 	}
 
 	.main-word-aside-img {
-		width: 2em;
-		height: 2em;
+		width: 2.5em;
+		height: 2.5em;
 	}
 </style>

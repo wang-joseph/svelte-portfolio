@@ -90,4 +90,25 @@
         padding-bottom: 0.15em;
         padding-top: 0.10em;
     }
+
+    /* media queries for phone */
+    @media only screen and (max-width: 600px) {
+        .background-text {
+            font-size: 128px;
+        }
+
+        .intro-text {
+            width: 90%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        .inner-thoughts {
+            font-size: 1.25em;
+        }
+    }
 </style>

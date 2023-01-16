@@ -6,26 +6,29 @@
 
     import { pageStatus } from '../stores/pageStatus';
 	import Hello from './hello.svelte';
+	import Socials from './socials.svelte';
+	import Experience from './experience.svelte';
+	import Portfolio from './portfolio.svelte';
 
 </script>
 
-<CenteredDots id="main-dots">
+<CenteredDots id="main-dots" shiftMultiplier={10}>
     <Header />
-
-    {#if $pageStatus == 0}
-    {/if}
 
     {#if $pageStatus == 1}
         <About />
     {/if}
 
     {#if $pageStatus == 2}
+        <Socials />
     {/if}
 
     {#if $pageStatus == 3}
+        <Experience />
     {/if}
 
     {#if $pageStatus == 4}
+        <Portfolio />
     {/if}
 
     {#if $pageStatus == 5}
@@ -38,7 +41,7 @@
 		background-color: #000;
 		color: #fff;
 		overflow-x: hidden;
-        overflow-y: hidden;
+        /* overflow-y: hidden; */
         scroll-behavior: smooth;
 
         padding: 0;

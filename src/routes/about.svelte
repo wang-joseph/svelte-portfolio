@@ -119,4 +119,32 @@
 	p > small {
 		font-size: 0.75em;
 	}
+
+	/* Media queries for mobile */
+	@media only screen and (max-width: 600px) {
+		.background-text {
+			font-size: 128px;
+		}
+
+		.text-image-split {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.intro-text {
+			width: 80vw;
+			margin-left: 0;
+		}
+
+		.image {
+			width: 80vw;
+			margin-right: 0;
+			margin-bottom: 5%;
+		}
+
+		p {
+			font-size: 1.25em;
+		}
+	}
 </style>
