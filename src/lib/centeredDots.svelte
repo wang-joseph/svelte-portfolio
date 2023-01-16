@@ -30,5 +30,6 @@
 		/* position second row of dots halfway diagonally to first row */
 		background-position: 0 0, 7.5vmin 7.5vmin;
 		background-size: 5vmin 5vmin;
+		z-index: -2;
     }
 </style>

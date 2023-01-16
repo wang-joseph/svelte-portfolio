@@ -4,7 +4,7 @@
 	import { pageStatus } from '..//stores/pageStatus';
 
 	import CyclingWords from './cyclingWords.svelte';
-	import { slide } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import AsideWords from './asideWords.svelte';
 
 	let stopWordCycle: () => void;
@@ -85,10 +85,10 @@
 <div id="main-text">
 	<div class="center" style={`height: ${heightOfMain}vh`} transition:slide>
 		{#if $pageStatus == -1}
-			<div class="line">
+			<div class="line" transition:fade>
 				<h3 class="word">Hi, I'm</h3>
 			</div>
-			<div class="line">
+			<div class="line" transition:fade>
 				<span class="word">
 					<CyclingWords
 						bind:stopCycleCallback={stopWordCycle}
@@ -101,29 +101,32 @@
 		<div class="line">
 			<h1 class="fancy word">
 				{#each $letterInNamesAndLinks as letter, i}
-					<a href="#about">
-						<span
-							id="big-letter-{i}"
-							class="name bigger-letter"
-							on:mouseenter={() => expandLetters(i)}
-							on:mouseleave={() => resetLetters(i)}
-							on:click={() => {
-								if ($pageStatus == 1) {
-									$pageStatus = -1;
-									heightOfMain = 100;
-								} else {
-									$pageStatus = 1;
-									heightOfMain = 20;
-								}
+					<span
+						id="big-letter-{i}"
+						class="name bigger-letter"
+						on:mouseenter={() => expandLetters(i)}
+						on:mouseleave={() => resetLetters(i)}
+						on:click={() => {
+							if ($pageStatus == i) {
+								$pageStatus = -1;
+								heightOfMain = 100;
+							} else {
+								$pageStatus = i;
+								heightOfMain = 20;
+								
+								// call reset on every other letter
+								$letterInNamesAndLinks.forEach((_, j) => {
+									if (j != i) resetLetters(j);
+								});
+							}
 
-								hasClicked = true;
-							}}
-							on:keydown
-						>
-							<span class="clickable letter">{letter.charAt(0)}</span>
-							<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
-						</span>
-					</a>
+							hasClicked = true;
+						}}
+						on:keydown
+					>
+						<span class="clickable letter">{letter.charAt(0)}</span>
+						<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
+					</span>
 				{/each}
 			</h1>
 
@@ -138,7 +141,7 @@
 		</div>
 
 		{#if $pageStatus == -1}
-			<div class="line">
+			<div class="line" transition:fade>
 				<h3 class="word">Wang</h3>
 			</div>
 		{/if}

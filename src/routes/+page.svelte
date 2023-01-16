@@ -12,29 +12,22 @@
     <Header />
 
     {#if $pageStatus == 0}
-        <About />
     {/if}
 
     {#if $pageStatus == 1}
-        <div id="about">
-            <About />
-        </div>
+        <About />
     {/if}
 
     {#if $pageStatus == 2}
-        <About />
     {/if}
 
     {#if $pageStatus == 3}
-        <About />
     {/if}
 
     {#if $pageStatus == 4}
-        <About />
     {/if}
 
     {#if $pageStatus == 5}
-        <About />
     {/if}
 </CenteredDots>
 
@@ -43,6 +36,7 @@
 		background-color: #000;
 		color: #fff;
 		overflow-x: hidden;
+        overflow-y: hidden;
         scroll-behavior: smooth;
 
         padding: 0;

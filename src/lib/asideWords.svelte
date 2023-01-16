@@ -25,7 +25,7 @@
 		</span>
 		<img class="main-word-aside-img" src="./pointing-arrow.png" alt="" />
 	</div>
-{:else if cancelledEarly && hasHovered}
+{:else if cancelledEarly && hasHovered && !hasClicked}
 	<div class="aside-container" in:fly={{ y: 50, duration: 1000 }} out:fade>
 		<span>
 			<h4 class="side-note">Hey! Try clicking!</h4>
