@@ -182,10 +182,6 @@
 		left: 0;
 	}
 
-	.debug {
-		border: 1px solid red;
-	}
-
 	.center {
 		display: flex;
 		flex-direction: column;
@@ -281,12 +277,6 @@
 	h3 {
 		font-size: 48px;
 		margin: 0;
-	}
-
-	a {
-		text-decoration: none;
-		color: inherit;
-		letter-spacing: -1em;
 	}
 
 	/* media queries for phones */

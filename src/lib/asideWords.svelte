@@ -14,7 +14,7 @@
 			needsToShow = true;
 			showed = true;
 			cancelledEarly = false;
-		}, 1500);
+		}, 2000);
 	});
 </script>
 
@@ -42,10 +42,6 @@
 {/if}
 
 <style>
-	.debug {
-		border: 1px solid red;
-	}
-
 	.aside-container {
 		position: absolute;
 		top: 0;

@@ -15,12 +15,12 @@
         <br><br><br>
 
         <p class="inner-thoughts"> This site was made in a few days with Svelte as a learning project.</p> 
-        <p class="inner-thoughts"> Please excuse any bugs as a result! I'll probably get to it.</p> 
-        <p class="inner-thoughts"> For what I've done, check out the EP trio in my name.</p> 
+        <p class="inner-thoughts"> Please excuse any bugs as a result! I'm still in the process of squashing bugs.</p> 
+        <p class="inner-thoughts"> For what else I've done, check out the EP trio in my name.</p> 
         <br><br><br>
 
-        <p class="inner-thoughts"> if you like light mode, click the J. </p>
-        <p class="inner-thoughts"> After realizing your mistake, click again for the sweet embrace of dark mode.</p> 
+        <p class="inner-thoughts"> Click the J to toggle between light and dark modes!. </p>
+        <!-- <p class="inner-thoughts"> After realizing your mistake, click again for the sweet embrace of dark mode.</p>  -->
 
         <p class="inner-thoughts"> <small> I also have plans to hide a few things in here...good luck finding them </small></p> 
 
@@ -28,10 +28,6 @@
 </div>
 
 <style>
-	.debug {
-		border: 1px solid red;
-	}
-
 	.background-text {
 		height: 100%;
 		width: 100%;

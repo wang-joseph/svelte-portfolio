@@ -7,15 +7,6 @@ interface colorGradient {
 	endColor: string;
 }
 
-interface cyclingColorsInterface {
-	0?: colorGradient;
-	1?: colorGradient;
-	2?: colorGradient;
-	3?: colorGradient;
-	4?: colorGradient;
-	5?: colorGradient;
-}
-
 export const cycleColors = readable([
 	{
 		rot: '90deg',

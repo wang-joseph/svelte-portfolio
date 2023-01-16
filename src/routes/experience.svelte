@@ -60,14 +60,6 @@
         margin: 0;
 	}
 
-
-    .inner-thoughts {
-        font-size: 1.5em;
-        font-family: 'Josefin Sans Light';
-        padding-bottom: 0.15em;
-        padding-top: 0.10em;
-    }
-
 	/* media queries for phones */
 	@media only screen and (max-width: 600px) {
 		.background-text {
@@ -77,10 +69,6 @@
 		p {
 			font-size: 1.25em;
             margin-left: 5%;
-		}
-
-		.inner-thoughts {
-			font-size: 1em;
 		}
 	}
 

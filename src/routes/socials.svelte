@@ -15,7 +15,7 @@
 		
 			<br><br><br>
 	
-			<p class="inner-thoughts"> this page is a bit barren so here is a picture of my cat </p>
+			<p class="inner-thoughts"> This page is a bit barren so here is a picture of my cat, Lulu! :) </p>
 		</div>
 		<div class="image">
 			<img class="cat-jpg" src="./cat.jpg" alt="cat" />
@@ -24,10 +24,6 @@
 </div>
 
 <style>
-	.debug {
-		border: 1px solid red;
-	}
-
 	.text-image-split {
 		display: flex;
 		flex-direction: row;

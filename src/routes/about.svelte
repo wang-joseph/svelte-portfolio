@@ -12,11 +12,11 @@
 			<p>
 				Howdy! I'm Joseph, a current University of Waterloo CS undergraduate.
 				<br/><br/>
-				I have a passion of learning whatever I find interesting, tech or not. Right now, I'm learning Cardistry and Svelte (hope u like the site), but I yearn to one day proudly say "wow, I know rust now".
+				I have a passion of learning whatever I find interesting, tech or not. Right now, I'm learning cardistry, but I've also dabbled in photography, guitar, video editing, and music production! I also enjoy instruments, with Ukulele being my favourite. 
 				<br /><br /> 
-				I think effervescent is the best word to make you sound smart, Lysol is the best cleaning product, and video game OSTs are underappreciated. Say hi to me whenever!
+				And of course, I'm also passionate about tech! I love TypeScript, and I'm currently learning a few other languages and frameworks like Rust, Go, and Flutter. Hardware is one of the things I'm interested in, and I definitely plan to create some physical projects in the near future.
 				<br /><br /> 
-				<small> :) </small>
+				<small> Feel free to reach out! :) </small>
 			</p>
 		</div>
 
@@ -27,10 +27,6 @@
 </div>
 
 <style>
-	.debug {
-		border: 1px solid red;
-	}
-
 	.background-text {
 		height: 100%;
 		width: 100%;
@@ -62,15 +58,6 @@
 		transform: translate(-50%, -50%);
 
 		text-align: center;
-	}
-
-	.about-me {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		height: 60vh;
 	}
 
 	.text-image-split {
@@ -112,7 +99,7 @@
 
 	p {
 		font-family: 'Josefin Sans Light';
-		font-size: 1.5em;
+		font-size: 1.4em;
 		font-weight: bold;
 	}
 

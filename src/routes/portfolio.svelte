@@ -68,10 +68,6 @@
 			font-size: 1.25em;
             margin-left: 5%;
 		}
-
-		.inner-thoughts {
-			font-size: 1em;
-		}
 	}
 	
     @media only screen and (max-width: 1000px) {

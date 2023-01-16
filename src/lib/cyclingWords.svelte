@@ -5,7 +5,11 @@
 	import { cycleText, cycleCountdown } from '../stores/cyclingText';
 
 
+	// cycling text index can choose a random sentence to start off at
+	// TODO: above makes this refresh twice -- fix this
+	// let cyclingTextIndex = Math.floor(Math.random() * $cycleText.length);
 	let cyclingTextIndex = 0;
+
 	let displayedText: string;
 	$: displayedText = $cycleText[cyclingTextIndex % $cycleText.length];
 
