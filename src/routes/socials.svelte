@@ -7,20 +7,35 @@
 		<span class="inner-bg-text">SUPER SOCIALS</span>
 	</div>
 
-    <div class="intro-text">
-        <p> LinkedIn: wang-joseph</p>
-        <p> Github: wang-joseph</p>
-        <p> Devpost: EmeraldEntities</p>
-    
-        <br><br><br>
-
-        <p class="inner-thoughts"> this page is a bit barren so here is a picture of my cat </p>
-    </div>
+	<div class="text-image-split">
+		<div class="intro-text">
+			<p> LinkedIn: <a href="https://linkedin.com/in/wang-joseph"><u>wang-joseph</u></a></p>
+			<p> Github: <a href="https://github.com/wang-joseph"><u>wang-joseph</u></a></p>
+			<p> Devpost: <a href="https://devpost.com/EmeraldEntities"><u>/EmeraldEntities</u></a></p>
+		
+			<br><br><br>
+	
+			<p class="inner-thoughts"> this page is a bit barren so here is a picture of my cat </p>
+		</div>
+		<div class="image">
+			<img class="cat-jpg" src="./cat.jpg" alt="cat" />
+		</div>
+	</div>
 </div>
 
 <style>
 	.debug {
 		border: 1px solid red;
+	}
+
+	.text-image-split {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+
+		margin-top: 5%;
 	}
 
 	.background-text {
@@ -57,10 +72,31 @@
 	}
 
 	.intro-text {
-        margin-top: 5%;
 		width: 60%;
         padding-left: 20%;
-        padding-right: 20%;
+        margin-bottom: 5%;
+	}
+
+	.image {
+		width: 50vw;
+		padding: 0.5%;
+
+		height: auto;
+		margin-right: 10%;
+    	transition: all 0.25s;
+
+		display: block;
+	
+  		border: 3px dashed #dfab00;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.cat-jpg {
+		width: 100%;
+		height: auto;
 	}
 
 	p {
@@ -71,9 +107,21 @@
         margin: 0;
 	}
 
-    p > small {
-        font-size: 0.75em;
-    }
+	a {
+		font-family: 'Beckman Free';
+		font-weight: bold;
+		padding: 0;
+		margin: 0;
+
+		color: #0064cf;
+		text-decoration: none;
+
+		transition: color 0.25s;
+	}
+
+	a:hover {
+		color: #04bcff;
+	}
 
     .inner-thoughts {
         font-size: 1.5em;
@@ -81,4 +129,34 @@
         padding-bottom: 0.15em;
         padding-top: 0.10em;
     }
+
+	/* media queries for phones */
+	@media only screen and (max-width: 600px) {
+		.background-text {
+			font-size: 128px;
+		}
+
+		.text-image-split {
+			flex-direction: column;
+		}
+
+		.image {
+			width: 80%;
+			margin-right: 0;
+		}
+
+		.intro-text {
+			width: 90%;
+			padding-left: 5%;
+			padding-right: 5%
+		}
+
+		p {
+			font-size: 1.25em;
+		}
+
+		.inner-thoughts {
+			font-size: 1em;
+		}
+	}
 </style>

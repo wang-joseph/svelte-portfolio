@@ -81,4 +81,16 @@
 		width: 2.5em;
 		height: 2.5em;
 	}
+
+	/* media queries for phones */
+	@media only screen and (max-width: 600px) {
+		.main-word-aside-img {
+			width: 1em;
+			height: 1em;
+		}
+
+		.side-note {
+			font-size: 12px;
+		}
+	}
 </style>

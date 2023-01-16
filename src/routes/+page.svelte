@@ -41,7 +41,7 @@
 		background-color: #000;
 		color: #fff;
 		overflow-x: hidden;
-        /* overflow-y: hidden; */
+        overflow-y: hidden;
         scroll-behavior: smooth;
 
         padding: 0;
@@ -64,4 +64,11 @@
 		font-family: 'Josefin Sans Light';
 		src: url('/fonts/JosefinSans-Light.ttf');
 	}
+
+    /* media queries for phones */
+    @media only screen and (max-width: 600px) {
+        :global(body) {
+            overflow-y: auto;
+        }   
+    }
 </style>
