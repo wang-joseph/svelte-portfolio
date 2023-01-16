@@ -38,6 +38,15 @@
 
 		giveColors(letter, i);
 		giveColors(bigLetter, i);
+
+		// if the header is showing, then when hovers happen, collapse the other letters
+		if ($pageStatus != 0) {
+			for (let j = 0; j < $letterInNamesAndLinks.length; j++) {
+				if (j === i) continue;
+
+				collapseLetters(j);
+			}
+		}
 	};
 
 	const resetLetters = (i: number) => {
@@ -52,6 +61,22 @@
 
 		resetColors(letter);
 		resetColors(bigLetter);
+
+		// if the header is showing, then when hovers exits, show the right letters
+		if ($pageStatus != 0) {
+			expandLetters($pageStatus);
+		}
+	};
+
+	const collapseLetters = (i: number) => {
+		const letter = document.getElementById(`letter-${i}`) as HTMLElement;
+		const bigLetter = document.getElementById(`big-letter-${i}`) as HTMLElement;
+
+		
+		if (!letter || !bigLetter) return;
+		console.log("collapsing")
+
+		letter.style.letterSpacing = '-1em';
 	};
 
 	const giveColors = (elem: HTMLElement, i: number) => {
@@ -73,6 +98,28 @@
 		elem.style.backgroundClip = '';
 		elem.style.webkitTextFillColor = '';
 	};
+
+	const showSections = (i: number) => {
+		if (i == 0) {
+			window.document.body.classList.toggle('light-mode');
+			return;
+		}
+
+		if ($pageStatus == i) {
+			$pageStatus = -1;
+			heightOfMain = 100;
+		} else {
+			$pageStatus = i;
+			heightOfMain = 20;
+		}
+
+		// call reset on every other letter
+		$letterInNamesAndLinks.forEach((_, j) => {
+			if (j != i) resetLetters(j);
+		});
+
+		hasClicked = true;
+	};
 </script>
 
 <!-- add a centered bold Joseph in the middle of the page -->
@@ -92,36 +139,18 @@
 		<div class="line">
 			<h1 class="fancy word">
 				{#each $letterInNamesAndLinks as letter, i}
-					<span
-						id="big-letter-{i}"
-						class="name bigger-letter"
-						on:mouseenter={() => expandLetters(i)}
-						on:mouseleave={() => resetLetters(i)}
-						on:click={() => {
-							if (i == 0) {
-								window.document.body.classList.toggle('light-mode');
-								return;
-							}
-
-							if ($pageStatus == i) {
-								$pageStatus = -1;
-								heightOfMain = 100;
-							} else {
-								$pageStatus = i;
-								heightOfMain = 20;
-							}
-
-							// call reset on every other letter
-							$letterInNamesAndLinks.forEach((_, j) => {
-								if (j != i) resetLetters(j);
-							});
-
-							hasClicked = true;
-						}}
-						on:keydown
-					>
-						<span class="clickable letter">{letter.charAt(0)}</span>
-						<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
+					<span class="big-letter-container">
+						<span
+							id="big-letter-{i}"
+							class="name bigger-letter"
+							on:mouseenter={() => expandLetters(i)}
+							on:mouseleave={() => resetLetters(i)}
+							on:click={() => showSections(i)}
+							on:keydown
+						>
+							<span class="clickable letter">{letter.charAt(0)}</span>
+							<span id="letter-{i}" class="clickable smaller-letter">{letter.slice(1)}</span>
+						</span>
 					</span>
 				{/each}
 			</h1>
@@ -171,7 +200,7 @@
 		margin: 0;
 		padding: 0;
 
-		letter-spacing: -0.1em;
+		/* letter-spacing: -0.1em; */
 	}
 
 	.line {
@@ -198,12 +227,14 @@
 		padding: 0;
 		display: inline-block;
 		font-size: 0.5em;
-		overflow: hidden;
 		transition: ease-in-out 0.3s;
 		letter-spacing: -1em;
-
-		position: relative;
-		top: 0.25em;
+		overflow: hidden;
+		
+		position: absolute;
+		bottom: -25%;
+		left: 0;
+		white-space: nowrap;
 
 		animation: background-pan 3s linear infinite;
 	}
@@ -212,9 +243,15 @@
 		animation: background-pan 3s linear infinite;
 	}
 
+	.big-letter-container {
+		position: relative;
+	}
+
 	.fancy {
 		position: relative;
 		z-index: 1;
+
+		display: flex;
 	}
 
 	@keyframes background-pan {
